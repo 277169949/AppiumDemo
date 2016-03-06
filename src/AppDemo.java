@@ -14,9 +14,9 @@ public class AppDemo {
 	public static void main(String[] args) throws MalformedURLException {
 
 		// 设置apk的路径
-		File classpathRoot = new File(System.getProperty("user.dir"));
-		File appDir = new File(classpathRoot, "apps");
-		File app = new File(appDir, "ISDAcceptance.apk");
+		// File classpathRoot = new File(System.getProperty("user.dir"));
+		// File appDir = new File(classpathRoot, "apps");
+		// File app = new File(appDir, "ISDAcceptance.apk");
 
 		// 设置自动化相关参数
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -32,11 +32,16 @@ public class AppDemo {
 		capabilities.setCapability("platformVersion", "4.4");
 
 		// 设置apk路径
-		capabilities.setCapability("app", app.getAbsolutePath());
+		// capabilities.setCapability("app", app.getAbsolutePath());
 		// 设置udid
 		// capabilities.setCapability("udid", "76P4C15708006345");
 
+		capabilities.setCapability("unicodeKeyboard", "True"); // for input
+																// Chinese
+		capabilities.setCapability("resetKeyboard", "True");
+
 		// 设置app的主包名和主类包
+
 		capabilities.setCapability("appPackage", "com.hw.smart.isdacceptance");
 		capabilities.setCapability("appActivity", "com.hw.smart.isdacceptance.provider.activites.WelcomeActivity");
 		capabilities.setCapability("appWaitActivity", "com.hw.smart.isdacceptance.provider.activites.LoginActivity");// 初始化AppiumDriver
@@ -45,8 +50,14 @@ public class AppDemo {
 
 		// 开始操作
 		driver.findElementById("et_login_uid").sendKeys("isdp1");
- 
 
-		driver.quit();
+		
+		
+		//driver.quit();
+		
+		
+		
 	}
+	
+	
 }
