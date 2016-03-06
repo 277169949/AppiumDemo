@@ -1,0 +1,173 @@
+   private AndroidDriver driver;
+ 
+@Before
+public void setUp() throws Exception {
+    DesiredCapabilities capabilities = new DesiredCapabilities();
+    capabilities.setCapability("deviceName", "Android Emulator");
+    capabilities.setCapability("platformVersion", "4.4");
+    capabilities.setCapability("platformName", "Android");
+    capabilities.setCapability("appPackage", "com.android.settings");
+    capabilities.setCapability("appActivity", ".Settings");
+ 
+    driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),
+            capabilities);
+}
+ 
+@After
+public void tearDown() throws Exception {
+    driver.quit();
+}
+2.截屏并保存至本地
+?
+1
+2
+3
+4
+5
+6
+7
+8
+        //截屏并保存至本地
+File screen = driver.getScreenshotAs(OutputType.FILE);
+File screenFile = new File("d:\\screen.png");
+try {
+    FileUtils.copyFile(screen, screenFile); //commons-io-2.0.1.jar中的api
+} catch (IOException e) {
+    e.printStackTrace();
+}
+
+3.push文件、pull文件
+?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+    File file = new File("d:\\test.txt"); //test.txt内容为"test"
+String content = null;
+try {
+    content = FileUtils.readFileToString(file);
+} catch (IOException e) {
+    e.printStackTrace();
+}
+ 
+byte[] data = Base64.encodeBase64(content.getBytes());
+driver.pushFile("sdcard/test.txt", data);
+ 
+byte[] resultDate = driver.pullFile("sdcard/test.txt");
+System.out.println(new String(Base64.decodeBase64(resultDate))); //打印结果为"test"
+
+4.
+?
+1
+2
+//获取当前界面的activity,可用于断言是否跳转到预期的activity
+driver.currentActivity();
+
+5.
+?
+1
+2
+//打开通知栏界面
+driver.openNotifications();
+6.
+?
+1
+2
+3
+4
+5
+6
+7
+8
+//获取网络状态
+int status = driver.getNetworkConnection().value;
+System.out.println(status);
+ 
+//设置网络状态
+driver.setNetworkConnection(new NetworkConnectionSetting(status));
+//或者
+driver.setNetworkConnection(new NetworkConnectionSetting(false, true, false));
+7.
+?
+1
+2
+//启动其他应用，跨APP
+driver.startActivity("com.android.camera", ".CameraLauncher");
+8.
+?
+1
+2
+3
+4
+//自动滑动列表
+driver.scrollTo("text");
+//或者
+driver.scrollToExact("text");
+9.
+?
+1
+2
+3
+4
+5
+        //安装APP
+driver.installApp(appPath);
+ 
+//判断应用是否已安装
+driver.isAppInstalled("package name");
+10.
+?
+1
+2
+3
+//拖动相机图标至日历图标位置
+new TouchAction(driver).longPress(driver.findElementByName("相机"))
+.moveTo(driver.findElementByName("日历")).release().perform();
+11.
+?
+1
+2
+3
+4
+5
+        //锁屏
+driver.lockScreen(2);
+ 
+//判断是否锁屏
+driver.isLocked();
+12.
+?
+1
+2
+        //发送按键事件
+driver.sendKeyEvent(AndroidKeyCode.HOME);
+13.
+
+?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+<span style="color:#ff0000;"> </span>
+                //通过uiautomator定位clickable属性为true的元素并点击
+        driver.findElementByAndroidUIAutomator("new UiSelector().clickable(true)").click();
+         
+        //相同属性的元素使用List存放
+        List<webelement> elements = driver.findElementsByClassName("class name");
+        elements.get(0).click(); //点击List中的第一个元素
+        //tap,点击元素位置
+        driver.tap(1, driver.findElementByName("日期和时间"), 0);</webelement>
