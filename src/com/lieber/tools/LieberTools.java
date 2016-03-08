@@ -8,11 +8,16 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LieberTools {
 
@@ -65,6 +70,63 @@ public class LieberTools {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * This Method for swipe up
+	 * 
+	 * 
+	 * @param driver
+	 * @param swipeTime
+	 *            滑动时间，单位毫秒
+	 */
+	public static void swipeToUp(AndroidDriver driver, int swipeTime) {
+		int width = driver.manage().window().getSize().width;
+		int height = driver.manage().window().getSize().height;
+		driver.swipe(width / 2, height * 3 / 4, width / 2, height / 4, swipeTime);
+		// wait for page loading
+	}
+
+	/**
+	 * This Method for swipe down
+	 * 
+	 * @param driver
+	 * @param swipeTime
+	 *            滑动时间，单位毫秒
+	 */
+	public static void swipeToDown(AndroidDriver driver, int swipeTime) {
+		int width = driver.manage().window().getSize().width;
+		int height = driver.manage().window().getSize().height;
+		driver.swipe(width / 2, height / 4, width / 2, height * 3 / 4, swipeTime);
+		// wait for page loading
+	}
+
+	/**
+	 * This Method for swipe Left
+	 * 
+	 * @param driver
+	 * @param swipeTime
+	 *            滑动时间，单位毫秒
+	 */
+	public static void swipeToLeft(AndroidDriver driver, int swipeTime) {
+		int width = driver.manage().window().getSize().width;
+		int height = driver.manage().window().getSize().height;
+		driver.swipe(width * 3 / 4, height / 2, width / 4, height / 2, swipeTime);
+		// wait for page loading
+	}
+
+	/**
+	 * This Method for swipe Right
+	 * 
+	 * @param driver
+	 * @param swipeTime
+	 *            滑动时间，单位毫秒
+	 */
+	public static void swipeToRight(AndroidDriver driver, int swipeTime) {
+		int width = driver.manage().window().getSize().width;
+		int height = driver.manage().window().getSize().height;
+		driver.swipe(width / 4, height / 2, width * 3 / 4, height / 2, swipeTime);
+		// wait for page loading
 	}
 
 }

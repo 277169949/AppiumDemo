@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class AppDemo {
-	private static AppiumDriver<WebElement> driver;
+	private static AppiumDriver driver;
 
 	public static void main(String[] args) throws MalformedURLException {
 		// 第一步： 初始化驱动配置以及被测应用
@@ -31,6 +31,9 @@ public class AppDemo {
 
 		}
 
+		LieberTools.swipeToDown((AndroidDriver) driver, 10000);
+		LieberTools.snapshot(driver, "swipeToDown");
+		LieberTools.snapshot(driver, "swipeToDown");
 		System.out.println("操作结束");
 
 		// 第三步： 退出应用
@@ -166,12 +169,17 @@ public class AppDemo {
 				LieberTools.snapshot(driver, "updateBasicData_Template");
 				driver.findElementById("android:id/button1").click();
 				LieberTools.snapshot(driver, "updateBasicData_Template_updating");
-				if (driver.findElementById("android:id/message")
-						.equals(ConstantsResources.TextView_TemplateUplate_Success)) {
-					LieberTools.snapshot(driver, "updateBasicData_Template_update_success");
-					driver.findElementById("android:id/button1").click();
-					LieberTools.snapshot(driver, "updateBasicData_Template_update_after");
-				}
+				// 先判断是否出现更新成功的提示，如果出现，则点击地确定，如果没出现，则一直等待
+
+				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+				// if (driver.findElementById("android:id/message")
+				// .equals(ConstantsResources.TextView_TemplateUplate_Success))
+				// {
+				LieberTools.snapshot(driver, "updateBasicData_Template_update_success");
+				driver.findElementById("android:id/button1").click();
+				LieberTools.snapshot(driver, "updateBasicData_Template_update_after");
+				// }
 
 			}
 			// 更新站点
@@ -180,14 +188,13 @@ public class AppDemo {
 				driver.findElementById("android:id/button1").click();
 				LieberTools.snapshot(driver, "updateBasicData_Site_updating");
 
-				if (driver.findElementById("android:id/message")
-						.equals(ConstantsResources.TextView_SiteUplate_Success)) {
-					LieberTools.snapshot(driver, "updateBasicData_Site_update_success");
-					driver.findElementById("android:id/button1").click();
-					LieberTools.snapshot(driver, "updateBasicData_Site_update_after");
-				}
+				// if (driver.findElementById("android:id/message")
+				// .equals(ConstantsResources.TextView_SiteUplate_Success)) {
+				LieberTools.snapshot(driver, "updateBasicData_Site_update_success");
+				driver.findElementById("android:id/button1").click();
+				LieberTools.snapshot(driver, "updateBasicData_Site_update_after");
+				// }
 			}
-
 		}
 
 	}
