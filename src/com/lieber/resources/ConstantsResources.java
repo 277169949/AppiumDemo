@@ -23,4 +23,21 @@ public class ConstantsResources {
 	 */
 	public final static String TextView_SiteUplate_Success = "Sites updated.";
 
+	/**
+	 * 数据采集代办页面的标题信息
+	 */
+	public final static String ActionBar_Title_Collect = "Task List";
+	/**
+	 * 文档页面的标题信息
+	 */
+	public final static String ActionBar_Title_Document = "Approve Document";
+	/**
+	 * 问题管理的标题信息
+	 */
+	public final static String ActionBar_Title_Issue = "Issue";
+	/**
+	 * 设置页面的标题信息
+	 */
+	public final static String ActionBar_Title_Setting = "Setting";
+
 }

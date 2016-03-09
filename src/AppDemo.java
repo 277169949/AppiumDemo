@@ -1,6 +1,7 @@
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -30,14 +31,47 @@ public class AppDemo {
 			updateBasicData();
 
 		}
-
-		LieberTools.swipeToDown((AndroidDriver) driver, 10000);
-		LieberTools.snapshot(driver, "swipeToDown");
-		LieberTools.snapshot(driver, "swipeToDown");
-		System.out.println("操作结束");
-
+		swipeDownRefreshData();
+		createTask("site 27");
 		// 第三步： 退出应用
-		// quit();
+		quit();
+	}
+
+	/**
+	 * 
+	 * @param duid要进行任务创建的DUID
+	 */
+	public static void createTask(String duid) {
+
+		// 先判断是否处于Colect页面
+		if (driver.findElementById("android:id/action_bar_title").getText()
+				.equals(ConstantsResources.ActionBar_Title_Collect)) {
+
+			driver.findElementById("com.hw.smart.isdacceptance:id/menu_todo_add").click();
+			LieberTools.snapshot(driver, "createTask");
+			driver.findElementById("com.hw.smart.isdacceptance:id/tv_add_site_task_create").click();
+			LieberTools.snapshot(driver, "createTask");
+			driver.findElementById("com.hw.smart.isdacceptance:id/actv_task_add_duid").click();
+			LieberTools.snapshot(driver, "createTask");
+			driver.findElementById("com.hw.smart.isdacceptance:id/actv_task_add_duid").click();
+			LieberTools.snapshot(driver, "createTask");
+			driver.findElementById("com.hw.smart.isdacceptance:id/actv_task_add_duid").sendKeys(duid);
+			LieberTools.snapshot(driver, "createTask");
+			driver.findElementById("com.hw.smart.isdacceptance:id/forms_textbox_icon_do").click();
+			LieberTools.snapshot(driver, "createTask");
+			driver.findElementById("android:id/button1").click();
+			LieberTools.snapshot(driver, "createTask");
+			driver.findElementById("com.hw.smart.isdacceptance:id/btn_task_add_save").click();
+
+		}
+
+	}
+
+	public static void swipeDownRefreshData() {
+		LieberTools.swipeToDown((AndroidDriver) driver, 6000);
+		LieberTools.snapshot(driver, "swipeToDown");
+		LieberTools.swipeToDown((AndroidDriver) driver, 6000);
+		LieberTools.snapshot(driver, "swipeToDown");
 	}
 
 	public static void initDriver() {
@@ -171,9 +205,9 @@ public class AppDemo {
 				LieberTools.snapshot(driver, "updateBasicData_Template_updating");
 				// 先判断是否出现更新成功的提示，如果出现，则点击地确定，如果没出现，则一直等待
 
-				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+				driver.manage().timeouts().implicitlyWait(3, TimeUnit.MINUTES);
 
-				// if (driver.findElementById("android:id/message")
+				// if (driver.findElementById("android:id/message").getText()
 				// .equals(ConstantsResources.TextView_TemplateUplate_Success))
 				// {
 				LieberTools.snapshot(driver, "updateBasicData_Template_update_success");
@@ -188,7 +222,7 @@ public class AppDemo {
 				driver.findElementById("android:id/button1").click();
 				LieberTools.snapshot(driver, "updateBasicData_Site_updating");
 
-				// if (driver.findElementById("android:id/message")
+				// if (driver.findElementById("android:id/message").getText()
 				// .equals(ConstantsResources.TextView_SiteUplate_Success)) {
 				LieberTools.snapshot(driver, "updateBasicData_Site_update_success");
 				driver.findElementById("android:id/button1").click();
@@ -204,6 +238,6 @@ public class AppDemo {
 			driver.quit();
 			System.out.println("应用关闭！");
 		}
-
+		System.out.println("操作结束");
 	}
 }

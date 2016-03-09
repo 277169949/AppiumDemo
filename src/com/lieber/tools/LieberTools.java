@@ -1,6 +1,7 @@
 package com.lieber.tools;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +22,36 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LieberTools {
+
+	public static void touch(AndroidDriver driver) {
+		final TouchAction touchAction = new TouchAction(driver);
+		List<WebElement> pic = driver.findElements(By.xpath("//android.widget.FrameLayout/android.widget.ImageView"));
+		for (int i = 0; i < pic.size(); i++) {
+			System.out.println(pic.size());
+			pic.get(i).click();
+		}
+
+		touchAction.press(pic.get(0)).waitAction(1500).moveTo(pic.get(1)).moveTo(pic.get(2)).moveTo(pic.get(4))
+				.moveTo(pic.get(6)).moveTo(pic.get(7)).moveTo(pic.get(8)).release();
+		touchAction.perform();
+	}
+
+	/**
+	 * LieberTools.doesWebElementExist((AndroidDriver)driver,By.id("")
+	 * 
+	 * @param driver
+	 * @param selector
+	 * @return
+	 */
+	public static boolean doesWebElementExist(AndroidDriver driver, By selector) {
+
+		try {
+			driver.findElement(selector);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
 
 	/**
 	 * 这个方法用来对手机进行截屏
@@ -55,6 +87,12 @@ public class LieberTools {
 		} finally {
 
 		}
+
+	}
+
+	public static void snapshot(TakesScreenshot drivername) {
+
+		snapshot(drivername, "");
 
 	}
 
