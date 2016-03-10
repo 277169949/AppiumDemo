@@ -23,6 +23,39 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LieberTools {
 
+	/**
+	 * 长按
+	 * 
+	 * @param driver
+	 */
+	public static void longPress(AndroidDriver driver) {
+		TouchAction action = new TouchAction(driver);
+		// 获取要长按的元素
+		WebElement el = driver.findElement(By.id("cn.langma.phonewo:id/user_name"));
+		// 长按
+		action.longPress(el).perform();
+	}
+
+	/**
+	 * 按住不放
+	 * 
+	 * @param driver
+	 */
+	public static void longPressNotRelease(AndroidDriver driver) {
+		TouchAction action = new TouchAction(driver);
+		// 按住等待5秒后释放
+		action.press(driver.findElement(By.name("按住说话"))).waitAction(5000);
+		action.perform();
+	}
+
+	public static void a(AndroidDriver driver, final By by) {
+		WebElement el = (new WebDriverWait(driver, 10)).until(new ExpectedCondition<WebElement>() {
+			public WebElement apply(WebDriver d) {
+				return d.findElement(by);
+			}
+		});
+	}
+
 	public static void touch(AndroidDriver driver) {
 		final TouchAction touchAction = new TouchAction(driver);
 		List<WebElement> pic = driver.findElements(By.xpath("//android.widget.FrameLayout/android.widget.ImageView"));

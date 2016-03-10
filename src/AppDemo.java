@@ -1,4 +1,5 @@
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 
 import org.openqa.selenium.By;
@@ -50,15 +51,15 @@ public class AppDemo {
 			driver.findElementById("com.hw.smart.isdacceptance:id/menu_todo_add").click();
 			LieberTools.snapshot(driver, "createTask");
 			driver.findElementById("com.hw.smart.isdacceptance:id/tv_add_site_task_create").click();
-			LieberTools.snapshot(driver, "createTask");
+
 			driver.findElementById("com.hw.smart.isdacceptance:id/actv_task_add_duid").click();
-			LieberTools.snapshot(driver, "createTask");
+
 			driver.findElementById("com.hw.smart.isdacceptance:id/actv_task_add_duid").click();
-			LieberTools.snapshot(driver, "createTask");
+
 			driver.findElementById("com.hw.smart.isdacceptance:id/actv_task_add_duid").sendKeys(duid);
-			LieberTools.snapshot(driver, "createTask");
+			TouchAction action = new TouchAction(driver);
+			action.press(150, 289).release().perform();
 			driver.findElementById("com.hw.smart.isdacceptance:id/forms_textbox_icon_do").click();
-			LieberTools.snapshot(driver, "createTask");
 			driver.findElementById("android:id/button1").click();
 			LieberTools.snapshot(driver, "createTask");
 			driver.findElementById("com.hw.smart.isdacceptance:id/btn_task_add_save").click();
