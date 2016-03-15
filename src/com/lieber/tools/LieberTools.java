@@ -129,6 +129,53 @@ public class LieberTools {
 
 	}
 
+	public static String CalculateScreenPoint(int[] args, int w1, int w2, int h1, int h2) {
+
+		String str = "action.press(" + w1 + "," + h1 + ")";
+		for (int i = 0; i < args.length; i++) {
+			switch (args[i]) {
+			case 1:
+				str += ".moveTo(" + w1 + "+ (" + w2 + " -" + w1 + ") / 6," + h1 + " + (" + h2 + "-" + h1 + ") / 6)";
+				break;
+			case 2:
+				str += ".moveTo(" + w1 + "+ (" + w2 + " -" + w1 + ") * 3 / 6, " + h1 + " + (" + h2 + "-" + h1
+						+ ") / 6)";
+				break;
+			case 3:
+				str += ".moveTo(" + w1 + "+ (" + w2 + " -" + w1 + ") * 5 / 6," + h1 + " + (" + h2 + "-" + h1 + ") / 6)";
+				break;
+			case 4:
+				str += ".moveTo(" + w1 + "+ (" + w2 + " -" + w1 + ") / 6, " + h1 + " + (" + h2 + "-" + h1
+						+ ") * 3 / 6)";
+				break;
+			case 5:
+				str += ".moveTo(" + w1 + "+ (" + w2 + " -" + w1 + ") * 3 / 6," + h1 + " + (" + h2 + "-" + h1
+						+ ") * 3 / 6)";
+				break;
+			case 6:
+				str += ".moveTo(" + w1 + "+ (" + w2 + " -" + w1 + ") * 5 / 6, " + h1 + " + (" + h2 + "-" + h1
+						+ ") * 3 / 6)";
+				break;
+			case 7:
+				str += ".moveTo(" + w1 + "+ (" + w2 + " -" + w1 + ") / 6, " + h1 + " + (" + h2 + "-" + h1
+						+ ") * 5 / 6)";
+				break;
+			case 8:
+				str += ".moveTo(" + w1 + "+ (" + w2 + " -" + w1 + ") * 3 / 6, " + h1 + " + (" + h2 + "-" + h1
+						+ ") * 5 / 6)";
+				break;
+			case 9:
+				str += ".moveTo(" + w1 + "+ (" + w2 + " -" + w1 + ") * 5 / 6, " + h1 + " + (" + h2 + "-" + h1
+						+ ") * 5 / 6)";
+				break;
+			default:
+				break;
+			}
+		}
+		str += ".release().perform();";
+		return str;
+	}
+
 	/**
 	 * 
 	 * @param driver
