@@ -1,0 +1,5 @@
+Feature : 登录应用
+Scenario : 登录应用
+Given 打开应用
+When 输入账号密码，点击登录
+Then 检测是否执行成功
