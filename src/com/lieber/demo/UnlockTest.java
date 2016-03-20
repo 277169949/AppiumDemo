@@ -1,3 +1,4 @@
+package com.lieber.demo;
 
 import java.net.URL;
 import io.appium.java_client.AppiumDriver;
