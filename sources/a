@@ -1,3 +1,6 @@
+http://isdp-smartqc-sit.huawei.com:8019/App/qc.apk
+
+
    private AndroidDriver driver;
  
 @Before
