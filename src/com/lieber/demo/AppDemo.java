@@ -28,7 +28,7 @@ public class AppDemo {
 		// 第二步： 对被测应用进行操作
 		System.out.println("开始操作app");
 
-		if (app_login("SIT")) {
+		if (app_login("Debug")) {
 
 			app_selectProject("ISDP   B3对接项目");
 
