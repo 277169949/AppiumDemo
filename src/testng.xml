@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ISDAcceptanceSuite">
+	<test name="ISDAcceptanceSuite" preserve-order="true" verbose="10">
+		<classes>
+			<class name="com.lieber.testsuite.ISDAcceptanceSuite">
+				<methods>
+					<include name="app_login" />
+					<include name="app_selectProject" />
+					<include name="updateBasicData" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

@@ -1,4 +1,5 @@
-package com.lieber.demo;
+package com.lieber.testsuite;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -8,6 +9,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import com.lieber.resources.ConstantsResources;
 import com.lieber.tools.LieberTools;
@@ -18,29 +22,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class AppDemo {
+public class ISDAcceptanceSuite {
 	private static AppiumDriver driver;
 
-	public static void main(String[] args) throws MalformedURLException {
-		// 第一步： 初始化驱动配置以及被测应用
-		initDriver();
-
-		// 第二步： 对被测应用进行操作
-		System.out.println("开始操作app");
-
-		if (app_login("Debug")) {
-
-			app_selectProject("ISDP   B3对接项目");
-
-			updateBasicData();
-
-		}
-		swipeDownRefreshData();
-		createTask("site 27");
-		// 第三步： 退出应用
-		quit();
-	}
-
+	/*
+	 * public static void main(String[] args) throws MalformedURLException {
+	 * 
+	 * // 第一步： 初始化驱动配置以及被测应用 initDriver();
+	 * 
+	 * // 第二步： 对被测应用进行操作 System.out.println("开始操作app");
+	 * 
+	 * if(
+	 * 
+	 * app_login("Debug")) {
+	 * 
+	 * app_selectProject("ISDP   B3对接项目");
+	 * 
+	 * updateBasicData();
+	 * 
+	 * } swipeDownRefreshData(); createTask("site 27"); // 第三步： 退出应用 quit(); }
+	 */
 	/**
 	 * 
 	 * @param duid要进行任务创建的DUID
@@ -78,6 +79,7 @@ public class AppDemo {
 		LieberTools.snapshot(driver, "swipeToDown");
 	}
 
+	@BeforeClass
 	public static void initDriver() {
 
 		// 设置apk的路径
@@ -123,6 +125,7 @@ public class AppDemo {
 	/**
 	 * login
 	 */
+	@Test
 	public static boolean app_login(String centerServerName) {
 		LieberTools.snapshot(driver, "app_launch");
 		driver.findElementById("et_login_uid").clear();
@@ -161,6 +164,7 @@ public class AppDemo {
 	/**
 	 * app_selectProject 从登录用户所获取到的项目列表选择项目进入
 	 */
+	@Test
 	public static void app_selectProject(String projectName) {
 
 		List<WebElement> projectNameList = driver.findElementsById("com.hw.smart.isdacceptance:id/tv_projectCode");
@@ -184,6 +188,7 @@ public class AppDemo {
 	/**
 	 * 更新版本、更新模板、更新站点
 	 */
+	@Test
 	public static void updateBasicData() {
 		// 判断登录后进入项目是否会有弹出框
 
@@ -237,6 +242,7 @@ public class AppDemo {
 
 	}
 
+	//@AfterClass
 	public static void quit() {
 		if (driver != null) {
 			driver.quit();
